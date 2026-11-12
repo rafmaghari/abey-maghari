@@ -3,8 +3,6 @@
 export const abey = {
   name: "Abey Maghari",
   firstName: "Abey",
-  // TODO: confirm the reference's decorative edition before publishing.
-  edition: "’25",
   greeting: "Hi, I’m Abey.",
   intro: "I help teams turn messy data into smart decisions.",
   infoTitle: "A LITTLE ABOUT ME",
