@@ -1,3 +1,44 @@
-# abey-maghari
+# Abey Maghari
 
-Abey Maghari personal profile site (Next.js, Vercel).
+A light personal profile with two portrait styles and an eight-item dress-up inventory. Built with Next.js App Router, TypeScript, Tailwind and Framer Motion.
+
+## Run
+
+```sh
+bun install
+npm run dev
+```
+
+Open http://localhost:3098. For a production preview, run `npm run build && npm start`.
+
+## Personalize
+
+Edit **`src/content/abey.ts`**. Every unconfirmed personal detail is explicitly marked TODO; the decorative reference edition also needs confirmation. There are no invented jobs, dates or social links. Search indexing is disabled until the placeholders are replaced.
+
+The approved visual direction and reference measurements are in `DESIGN.md`; durable product constraints are in `PRODUCT.md`.
+
+## Check
+
+```sh
+npm run build
+npm run lint
+npx tsc --noEmit
+npm run check:assets
+npx playwright test tests/e2e/profile.spec.ts --workers=2
+```
+
+Use the available worker budget (maximum four) rather than an uncapped run. The scoped flow runs Chromium and WebKit at three viewports and keeps screenshots, video, trace and caption timestamps. Browser binaries must already be installed.
+
+## Deploy
+
+Import this repository into Vercel. Next.js is auto-detected; no environment variables, external image service or custom Vercel configuration is required.
+
+## Portraits and assets
+
+The real portrait retains the source photograph's pixels, with only a native foreground alpha matte, a separately isolated hand matte, resizing and WebP compression. No source photograph, location metadata or background people are served. `tools/cutout.swift` documents the native matte extraction; final alpha cleanup is reviewed before shipping.
+
+The cartoon was generated from the supplied photo using GPT Image 2 and selected for face shape, natural smile/braces, hair and outfit fidelity. It is an illustration, not a retouched Normal portrait. Normal is the default.
+
+Both portraits use a 1000×1300 coordinate system. Face-safe landmarks and individual accessory anchors live in `src/components/PortraitExtras.tsx`. Heart sunglasses sit on her hair so the face stays unobscured. No backdrop dims the portrait when inventory is open.
+
+Self-hosted Lilita One, DM Sans and the recording-only Inter subset are under the SIL Open Font License; license notices are in `public/fonts/`. SVG accessories and card graphics are original project geometry.
