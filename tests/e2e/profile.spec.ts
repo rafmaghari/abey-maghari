@@ -11,7 +11,23 @@ async function assertFrame(page: Page) {
     const stage = document.querySelector('[data-testid="portrait-stage"]')!;
     const face = document.querySelector('[data-testid="face-safe-zone"]')!.getBoundingClientRect();
     const stageBox = stage.getBoundingClientRect();
+    const bow = stage.querySelector('[data-testid="item-2"] [data-face-avoid]');
+    let anchorOnHair = true;
+    if (bow) {
+      const image = stage.querySelector('[data-active="true"] img') as HTMLImageElement;
+      const imageBox = image.getBoundingClientRect();
+      const bowBox = bow.getBoundingClientRect();
+      const canvas = document.createElement('canvas');
+      canvas.width = image.naturalWidth;
+      canvas.height = image.naturalHeight;
+      const context = canvas.getContext('2d')!;
+      context.drawImage(image, 0, 0);
+      const x = Math.floor((bowBox.left + bowBox.width / 2 - imageBox.left) / imageBox.width * image.naturalWidth);
+      const y = Math.floor((bowBox.top + bowBox.height / 2 - imageBox.top) / imageBox.height * image.naturalHeight);
+      anchorOnHair = context.getImageData(x, y, 1, 1).data[3] > 240;
+    }
     return {
+      anchorOnHair,
       overflow: document.documentElement.scrollWidth > window.innerWidth,
       faceInFrame: face.left >= Math.max(stageBox.left, 0) && face.top >= stageBox.top && face.right <= Math.min(stageBox.right, innerWidth) && face.bottom <= stageBox.bottom,
       uncovered: [...document.querySelectorAll('[data-face-avoid]')].every(el => {
@@ -20,7 +36,7 @@ async function assertFrame(page: Page) {
       }),
     };
   });
-  expect(frame).toEqual({ overflow: false, faceInFrame: true, uncovered: true });
+  expect(frame).toEqual({ anchorOnHair: true, overflow: false, faceInFrame: true, uncovered: true });
 }
 
 async function caption(page: Page, text: string) {

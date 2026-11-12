@@ -18,6 +18,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 - When a focused inventory action disables itself (for example Clear items), move focus to an enabled item before changing state; otherwise Escape can lose the panel's keyboard event path. Regression: `tests/e2e/profile.spec.ts`.
 
+- Validate hair-accessory anchors against the portrait alpha in source-canvas coordinates, not scaled screenshot estimates; the flow samples the bow centre to catch ornaments floating in transparent space.
+
 ## Maintaining this file
 
 Keep this file for knowledge useful to almost every future agent session in this project.

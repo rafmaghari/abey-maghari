@@ -6,8 +6,8 @@ import { ItemArt } from "./ItemArt";
 
 export type PortraitMode = "normal" | "cartoon";
 export const portraitLandmarks = {
-  normal: { face: [430, 220, 440, 650], crown: [420, 58, 440, 140], glasses: [530, 102, 265, 100], bow: [430, 105, 120, 110], earLeft: [386, 720, 35, 70], earRight: [882, 700, 32, 75], tiara: [530, 2, 270, 170] },
-  cartoon: { face: [412, 220, 440, 650], crown: [405, 52, 440, 140], glasses: [510, 103, 265, 100], bow: [370, 115, 120, 100], earLeft: [369, 684, 35, 70], earRight: [864, 628, 32, 75], tiara: [510, 0, 270, 170] },
+  normal: { face: [430, 220, 440, 650], crown: [420, 58, 440, 140], glasses: [530, 102, 265, 100], bow: [490, 105, 120, 110], earLeft: [386, 720, 35, 70], earRight: [882, 700, 32, 75], tiara: [530, 2, 270, 170] },
+  cartoon: { face: [412, 220, 440, 650], crown: [405, 52, 440, 140], glasses: [510, 103, 265, 100], bow: [490, 105, 120, 100], earLeft: [369, 684, 35, 70], earRight: [864, 628, 32, 75], tiara: [510, 0, 270, 170] },
 } as const;
 
 type Props = { equipped: boolean[]; mode: PortraitMode };
