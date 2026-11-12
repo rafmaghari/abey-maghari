@@ -2,7 +2,7 @@
 
 Mode: Experience. Reference: supplied 736 × 1104 portfolio screenshot, direction only; no reference pixels or text ship.
 
-Cream ground (#fffcf5, inferred), black ink (#090909), tan display accent (#c8ad89, inferred). Five rectangular card grounds: sand, warm beige, pale peach, olive, dusty blue. Equal content edges. No generic navbar, social links or resume claims.
+Cream ground (#fffcf5, inferred), black ink (#090909), tan display accent (#c8ad89, inferred). Five rectangular card grounds: sand, warm beige, pale peach, olive, dusty blue. Equal content edges. No generic marketing navbar or invented social links/claims. The approved experience extension adds a quiet, non-sticky same-page navigation and uses only the supplied career claims.
 
 Reference geometry at 736 px: content x≈77–658, wordmark x≈64–657/y≈48–214, portrait x≈234–502/y≈112–440, name x≈77/y≈237, intro y≈470, info y≈603, content heading y≈808, cards y≈875. These are visual measurements, not exact font identification. Use proportional container bounds and a full-width desktop composition; reflow info and cards on phones.
 
@@ -13,6 +13,9 @@ Hero: huge PORTFOLIO with tan ’25 reference ornament; centered isolated portra
 Inventory uses Headless UI Popover for focus/Escape/outside-click behavior, not a modal. Eight flat SVG/CSS accessories, measured separately for both portraits in a shared asset coordinate system. Heart sunglasses rest on hair above the eyes to satisfy the no-face-covering constraint. All decorations avoid the protected face rectangle.
 
 Mobile: 20 px equal gutters, wordmark scales to width, complete face visible, controls below figure, info grid reflows, colored cards wrap rather than overflow. Controls ≥44 px; visible focus, semantic headings and buttons, pressed state exposed, reduced-motion support.
+
+## Approved experience extension
+See `docs/experience-extension.md`: headline intro, five-item highlights strip, typographic specialties, five native expandable employer entries (Books To Go shows both titles), source notes and quiet anchor navigation. Keep all unfilled personal-interest TODOs and the existing hero/inventory. The portraits are explicitly unchanged pending a separate photo decision.
 
 ## Implementation / verification plan
 1. Create stripped cutout from original pixels using Apple Vision foreground instance mask; inspect edges on light/dark grounds and verify strangers are absent.

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./experience.css";
 
 @font-face { font-family: "Lilita One"; src: url("/fonts/lilita-one.ttf") format("truetype"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "DM Sans"; src: url("/fonts/dm-sans.ttf") format("truetype"); font-weight: 400; font-display: swap; }

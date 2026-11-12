@@ -142,9 +142,10 @@ test('portrait modes and every inventory item remain usable and face-safe', asyn
   await page.emulateMedia({ colorScheme: 'dark' });
   expect(await page.locator('html').evaluate(el => getComputedStyle(el).backgroundColor)).toBe('rgb(255, 252, 245)');
   await capture(page, testInfo.outputPath('dark-system.png'));
-  await step('Scroll tour: editable intro, personal details and five TODO cards; no invented biography.');
-  await page.getByRole('heading', { name: 'Hi, I’m Abey.' }).scrollIntoViewIfNeeded();
-  await expect(page.getByTestId('intro')).toContainText('TODO');
+  await step('Scroll tour: approved career headline, unfilled personal details and five TODO cards.');
+  await page.getByRole('heading', { name: 'I help teams turn messy data into smart decisions.' }).scrollIntoViewIfNeeded();
+  await expect(page.getByTestId('intro')).toHaveText('I help teams turn messy data into smart decisions.');
+  await expect(page.getByTestId('personal-notes')).toContainText('TODO');
   await page.getByRole('heading', { name: 'FAVOURITE THINGS' }).scrollIntoViewIfNeeded();
   await expect(page.getByTestId('favourite-card')).toHaveCount(5);
   for (const card of await page.getByTestId('favourite-card').all()) await expect(card).toContainText('TODO');
