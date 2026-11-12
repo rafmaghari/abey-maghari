@@ -29,7 +29,7 @@ export default function Profile() {
     <p className="hero-name">{abey.name.split(" ").map(name=><span key={name}>{name}</span>)}</p>
     <div className="portrait-stage" data-testid="portrait-stage" aria-label={`Abey Maghari, ${mode} portrait`}>
       <div className="portrait-canvas">
-        {(["normal","cartoon"] as const).map(style=><motion.div key={style} className="portrait-image" data-testid={`portrait-${style}`} data-active={mode===style} aria-hidden={mode!==style} initial={false} animate={{opacity:mode===style?1:0}} transition={{duration:reduced?.08:.2,ease:[.23,1,.32,1]}}><Image src={`/profile/${style}.webp`} alt={style==="normal"?"Abey Maghari smiling, from her original photo":"A flat illustrated likeness of Abey Maghari"} width={1000} height={1300} priority unoptimized sizes="(max-width: 600px) 300px, 520px"/></motion.div>)}
+        {(["normal","cartoon"] as const).map(style=><motion.div key={style} className="portrait-image" data-testid={`portrait-${style}`} data-active={mode===style} aria-hidden={mode!==style} initial={false} animate={{opacity:mode===style?1:0}} transition={{duration:reduced?.08:.2,ease:[.23,1,.32,1]}}><Image src={`/profile/${style}.webp`} alt={style==="normal"?"Abey Maghari smiling in her approved edited photo, wearing a black top":"A flat illustrated likeness of Abey Maghari"} width={1000} height={1300} priority unoptimized sizes="(max-width: 600px) 300px, 520px"/></motion.div>)}
         <div data-testid="face-safe-zone" className="face-safe-zone" aria-hidden="true" style={{left:`${x/10}%`,top:`${y/13}%`,width:`${w/10}%`,height:`${h/13}%`}}/>
         <PortraitExtras equipped={equipped} mode={mode}/>
       </div>

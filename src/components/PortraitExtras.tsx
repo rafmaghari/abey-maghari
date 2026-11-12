@@ -6,8 +6,8 @@ import { ItemArt } from "./ItemArt";
 
 export type PortraitMode = "normal" | "cartoon";
 export const portraitLandmarks = {
-  normal: { face: [430, 220, 440, 650], crown: [420, 58, 440, 140], glasses: [530, 102, 265, 100], bow: [490, 105, 120, 110], earLeft: [386, 720, 35, 70], earRight: [882, 700, 32, 75], tiara: [530, 2, 270, 170] },
-  cartoon: { face: [412, 220, 440, 650], crown: [405, 52, 440, 140], glasses: [510, 103, 265, 100], bow: [490, 105, 120, 100], earLeft: [369, 684, 35, 70], earRight: [864, 628, 32, 75], tiara: [510, 0, 270, 170] },
+  normal: { face: [335, 160, 350, 500], crown: [470, 55, 200, 100], glasses: [490, 65, 170, 85], bow: [475, 90, 100, 60], earLeft: [300, 555, 28, 60], earRight: [694, 543, 30, 65], tiara: [465, 0, 210, 145] },
+  cartoon: { face: [330, 165, 355, 500], crown: [470, 55, 200, 100], glasses: [490, 65, 170, 85], bow: [475, 90, 100, 60], earLeft: [300, 570, 28, 60], earRight: [694, 565, 30, 65], tiara: [465, 0, 210, 145] },
 } as const;
 
 type Props = { equipped: boolean[]; mode: PortraitMode };
@@ -35,7 +35,7 @@ export default function PortraitExtras({ equipped, mode }: Props) {
         {item === 3 && <>{[landmarks.earLeft,landmarks.earRight].map((box,i)=><Placement key={i} box={box}><svg viewBox="0 0 40 75" fill="none" stroke="#4a3825" strokeWidth="1.6"><circle cx="20" cy="9" r="4" fill="#ebc887"/><path d="M20 13v13M20 23l5 15 12 6-12 6-5 15-5-15-12-6 12-6Z" fill="#ebc887"/></svg></Placement>)}</>}
         {item === 4 && <Placement box={landmarks.tiara}><ItemArt item={4}/></Placement>}
         {item === 5 && <>{[[115,170,135,135],[208,414,98,98],[30,610,115,115]].map((box,i)=><Placement box={box} key={i} float><ItemArt item={5}/></Placement>)}</>}
-        {item === 6 && <>{[[60,220,72,72],[245,310,62,62],[325,560,62,62],[35,840,70,70],[935,430,60,60]].map((box,i)=><Placement box={box} key={i} float><ItemArt item={6}/></Placement>)}</>}
+        {item === 6 && <>{[[60,220,72,72],[245,310,62,62],[235,560,62,62],[35,840,70,70],[935,430,60,60]].map((box,i)=><Placement box={box} key={i} float><ItemArt item={6}/></Placement>)}</>}
         {item === 7 && <>{[[235,90,83,83],[46,430,95,95],[290,700,65,65],[935,200,65,65]].map((box,i)=><Placement box={box} key={i} float><ItemArt item={7}/></Placement>)}</>}
       </motion.div>)}
     </AnimatePresence>

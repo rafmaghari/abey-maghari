@@ -1,5 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 import { writeFile } from 'node:fs/promises';
+import { verifyPortraitAssets } from '../portrait-proof';
 
 // This focused regression flow intentionally keeps a video and trace on every run.
 test.use({ video: 'on', trace: 'on' });
@@ -72,10 +73,12 @@ test('portrait modes and every inventory item remain usable and face-safe', asyn
     captions.push(`${((Date.now() - started) / 1000).toFixed(1)}s — ${text}`);
     if (process.env.CAPTION_IN_BROWSER === '1') await caption(page, text);
   }
+  const portraitProof = await verifyPortraitAssets();
+  await writeFile(testInfo.outputPath('portrait-proof.json'), JSON.stringify(portraitProof, null, 2) + '\n');
   await page.goto('/');
   await expect(page.getByRole('heading', { name: 'PORTFOLIO', exact: true })).toBeVisible();
   await page.evaluate(() => document.fonts.ready);
-  await step('What this shows: Abey’s portrait playground — look for both styles, eight items and a clear face.');
+  await step('What this shows: portraits from Abey’s edited photo — exact Normal face pixels, no foot or mark, and eight aligned items.');
   await page.waitForTimeout(1800);
   for (const mode of ['Normal', 'Cartoon']) {
     await step(`${mode} portrait: switch styles without changing the page layout.`);
@@ -156,7 +159,7 @@ test('portrait modes and every inventory item remain usable and face-safe', asyn
   await page.reload();
   await page.getByRole('link', { name: 'Back to top' }).click();
   await expect(page.getByRole('heading', { name: 'PORTFOLIO', exact: true })).toBeInViewport();
-  await step('Result: both portraits, all eight items, keyboard and responsive checks passed.');
+  await step('Result: edited-source face, braces, hair, earring and black-top pixel proofs; clean background and all eight item checks passed.');
   await page.waitForTimeout(2000);
   expect(errors).toEqual([]);
   expect(failed).toEqual([]);

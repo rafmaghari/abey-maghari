@@ -22,7 +22,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 - Display headlines need the same long-copy wrapping guarantee as paragraphs; the existing intro overflow regression covers both. See `src/app/experience.css` and `tests/e2e/profile.spec.ts`.
 - Approved career copy and truncation limitations: `tests/fixtures/abey-experience.md`; editable data stays in `src/content/abey.ts`. `tests/e2e/experience.spec.ts` checks literal source copy, both Books To Go titles and native disclosures. Do not infer hidden skills or company logos.
-- Portrait repairs are separately pending; do not silently change the assets during career-content work. See the scope boundary in `docs/experience-extension.md`.
+- Current portrait authority: `docs/edited-portraits.md` and `tests/fixtures/portrait-source.json`. Normal is lossless and its face/braces/hair/earring/black-top RGB hashes match the approved edited source. Never regenerate those goldens from output images.
+- Never recover disconnected limbs based on a person mask alone; they may belong to someone else. Keep the face-selected instance, reject the foot/background-mark regions, and review alpha on light and dark grounds. `tests/portrait-proof.ts` guards these regressions.
 
 ## Maintaining this file
 

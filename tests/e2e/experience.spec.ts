@@ -124,7 +124,7 @@ test('career source, navigation and five lightweight employer disclosures', asyn
   await screenshot('reduced-motion-dark-system');
   await page.getByRole('link', { name: 'Back to top' }).click();
   await expect(page.getByRole('heading', { name: 'PORTFOLIO', exact: true })).toBeInViewport();
-  step('Result: verbatim source, five employers, both Books To Go titles, navigation and keyboard disclosures passed. Portrait files are unchanged.');
+  step('Result: verbatim source, five employers, both Books To Go titles, navigation and keyboard disclosures passed. New portraits remain usable.');
   await page.waitForTimeout(2000);
   expect(errors).toEqual([]);
   expect(badResponses).toEqual([]);

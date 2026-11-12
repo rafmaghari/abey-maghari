@@ -35,10 +35,10 @@ Import this repository into Vercel. Next.js is auto-detected; no environment var
 
 ## Portraits and assets
 
-The real portrait retains the source photograph's pixels, with only a native foreground alpha matte, a separately isolated hand matte, resizing and WebP compression. No source photograph, location metadata or background people are served. `tools/cutout.swift` documents the native matte extraction; final alpha cleanup is reviewed before shipping.
+The real portrait uses the approved edited photo, not the old cropped restaurant image. It retains original RGB with a native foreground alpha matte and boundary-only spill attenuation; no Normal retouching, inpainting, reshaping or resampling. Bust framing excludes the bottom strip containing the background sparkle. Normal is lossless WebP, with exact source-derived face, braces, hair, earring and black-top RGB proofs. No source photo or location metadata is served. See `docs/edited-portraits.md`, `tools/cutout.swift` and `tools/prepare-edited-portrait.py`.
 
-The cartoon was generated from the supplied photo using GPT Image 2 and selected for face shape, natural smile/braces, hair and outfit fidelity. It is an illustration, not a retouched Normal portrait. Normal is the default.
+Three new GPT Image 2 cartoons used the edited photo as their only reference. Candidate 2 was selected for fuller face shape, natural smile/braces, hair, earrings and black-top fidelity. No foot or background sparkle remains. It is an illustration, not a retouched Normal portrait. Normal is the default.
 
-Both portraits use a 1000×1300 coordinate system. Face-safe landmarks and individual accessory anchors live in `src/components/PortraitExtras.tsx`. Heart sunglasses sit on her hair so the face stays unobscured. No backdrop dims the portrait when inventory is open.
+Both portraits use a 1000×1300 coordinate system with a square visible bust stage. Face-safe landmarks and individual accessory anchors live in `src/components/PortraitExtras.tsx`. Heart sunglasses sit on her hair so the face stays unobscured. No backdrop dims the portrait when inventory is open.
 
 Self-hosted Lilita One, DM Sans and the recording-only Inter subset are under the SIL Open Font License; license notices are in `public/fonts/`. SVG accessories and card graphics are original project geometry.
