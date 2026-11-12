@@ -1,4 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
+import { writeFile } from 'node:fs/promises';
 
 // This focused regression flow intentionally keeps a video and trace on every run.
 test.use({ video: 'on', trace: 'on' });
@@ -43,7 +44,7 @@ async function capture(page: Page, path: string) {
   await page.screenshot({ path, fullPage: true, animations: 'disabled', style: '#flow-caption { visibility: hidden !important; }' });
 }
 
-test('portrait modes and every inventory item remain usable and face-safe', async ({ page }, testInfo) => {
+test('portrait modes and every inventory item remain usable and face-safe', async ({ page, browserName }, testInfo) => {
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
@@ -59,13 +60,14 @@ test('portrait modes and every inventory item remain usable and face-safe', asyn
   await expect(page.getByRole('heading', { name: 'PORTFOLIO', exact: true })).toBeVisible();
   await page.evaluate(() => document.fonts.ready);
   await step('What this shows: Abey’s portrait playground — look for both styles, eight items and a clear face.');
-  await page.waitForTimeout(1100);
+  await page.waitForTimeout(1800);
   for (const mode of ['Normal', 'Cartoon']) {
     await step(`${mode} portrait: switch styles without changing the page layout.`);
     await page.getByRole('button', { name: mode, exact: true }).click();
     await expect(page.getByRole('button', { name: mode, exact: true })).toHaveAttribute('aria-pressed', 'true');
     await expect(page.getByTestId(`portrait-${mode.toLowerCase()}`)).toBeVisible();
     await page.waitForTimeout(250);
+    await expect(page.getByTestId(`portrait-${mode.toLowerCase()}`)).toHaveCSS('opacity', '1');
     await assertFrame(page);
     await capture(page, testInfo.outputPath(`${mode.toLowerCase()}-default.png`));
     await page.getByRole('button', { name: 'Open inventory', exact: true }).click();
@@ -80,12 +82,13 @@ test('portrait modes and every inventory item remain usable and face-safe', asyn
       await button.click();
       await expect(button).toHaveAttribute('aria-pressed', 'true');
       await expect(page.getByTestId(`item-${index}`)).toBeVisible();
-      await page.waitForTimeout(220);
+      await page.waitForTimeout(600);
       await assertFrame(page);
       await capture(page, testInfo.outputPath(`${mode.toLowerCase()}-${index}-on.png`));
       await button.click();
       await expect(button).toHaveAttribute('aria-pressed', 'false');
       await expect(page.getByTestId(`item-${index}`)).toHaveCount(0);
+      await page.waitForTimeout(250);
       await capture(page, testInfo.outputPath(`${mode.toLowerCase()}-${index}-off.png`));
     }
     // Verify combinations as well as the isolated states, and state persistence.
@@ -94,6 +97,7 @@ test('portrait modes and every inventory item remain usable and face-safe', asyn
     await capture(page, testInfo.outputPath(`${mode.toLowerCase()}-all.png`));
     await page.getByRole('button', { name: 'Clear items', exact: true }).click();
     await expect(page.locator('[data-equipped="true"]')).toHaveCount(0);
+    await expect(page.getByRole('button', { name: 'Flower crown', exact: true })).toBeFocused();
     await page.keyboard.press('Escape');
     await expect(page.getByRole('heading', { name: 'Inventory', exact: true })).not.toBeVisible();
   }
@@ -101,6 +105,11 @@ test('portrait modes and every inventory item remain usable and face-safe', asyn
   const bag = page.getByRole('button', { name: 'Open inventory', exact: true });
   await bag.focus();
   await page.keyboard.press('Enter');
+  await expect(page.getByRole('button', { name: 'Close inventory', exact: true })).toBeFocused();
+  // macOS WebKit follows the system's default button-navigation preference.
+  // Option+Tab is Safari's native all-controls shortcut; do not change global preferences.
+  // https://github.com/microsoft/playwright/issues/41808
+  await page.keyboard.press(browserName === 'webkit' && process.platform === 'darwin' ? 'Alt+Tab' : 'Tab');
   await expect(page.getByRole('button', { name: 'Flower crown', exact: true })).toBeFocused();
   await page.keyboard.press('Escape');
   await expect(bag).toBeFocused();
@@ -111,6 +120,12 @@ test('portrait modes and every inventory item remain usable and face-safe', asyn
   expect(await page.getByTestId('item-7').locator('[data-float]').first().evaluate(el => getComputedStyle(el).animationName)).toBe('none');
   await page.keyboard.press('Escape');
   await assertFrame(page);
+  await bag.click();
+  await page.getByRole('button', { name: 'Close inventory', exact: true }).click();
+  await expect(bag).toBeFocused();
+  await page.emulateMedia({ colorScheme: 'dark' });
+  expect(await page.locator('html').evaluate(el => getComputedStyle(el).backgroundColor)).toBe('rgb(255, 252, 245)');
+  await capture(page, testInfo.outputPath('dark-system.png'));
   await step('Scroll tour: editable intro, personal details and five TODO cards; no invented biography.');
   await page.getByRole('heading', { name: 'Hi, I’m Abey.' }).scrollIntoViewIfNeeded();
   await expect(page.getByTestId('intro')).toContainText('TODO');
@@ -122,9 +137,13 @@ test('portrait modes and every inventory item remain usable and face-safe', asyn
   await page.getByTestId('intro').evaluate(el => { el.textContent = 'TODO ' + 'Averylongunbrokenword'.repeat(15) + ' 你好 🌸'; });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.reload();
+  await page.getByRole('link', { name: 'Back to top' }).click();
+  await expect(page.getByRole('heading', { name: 'PORTFOLIO', exact: true })).toBeInViewport();
   await step('Result: both portraits, all eight items, keyboard and responsive checks passed.');
-  await page.waitForTimeout(1200);
+  await page.waitForTimeout(2000);
   expect(errors).toEqual([]);
   expect(failed).toEqual([]);
-  await testInfo.attach('captions', { body: captions.join('\n'), contentType: 'text/markdown' });
+  const captionFile = testInfo.outputPath('video.webm.md');
+  await writeFile(captionFile, captions.join('\n') + '\n');
+  await testInfo.attach('captions', { path: captionFile, contentType: 'text/markdown' });
 });

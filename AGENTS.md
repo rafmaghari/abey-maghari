@@ -16,6 +16,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Use Bun for dependencies; `npm run build`, `npm run lint`, `npx tsc --noEmit`, and `npm run check:assets` are static checks. Preview: `npm run dev` (3098).
 - Focused browser regression: `tests/e2e/profile.spec.ts`, six projects in `playwright.config.ts`. Run with a capped `--workers` budget. Images are local and stripped; no runtime API keys or services are needed.
 
+- When a focused inventory action disables itself (for example Clear items), move focus to an enabled item before changing state; otherwise Escape can lose the panel's keyboard event path. Regression: `tests/e2e/profile.spec.ts`.
+
 ## Maintaining this file
 
 Keep this file for knowledge useful to almost every future agent session in this project.
