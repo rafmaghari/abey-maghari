@@ -11,11 +11,10 @@ function Wordmark() {
   const letters = [
     ["P",70,286,-7,285],["O",210,310,-17,235],["R",342,261,-10,280],
     ["T",478,244,3,310],["F",606,256,-6,280],["O",744,275,13,255],
-    ["L",874,292,7,270],["I",993,306,7,260],["O",1114,310,13,245],
+    ["L",874,272,7,270],["I",993,261,7,260],["O",1114,242,13,245],
   ] as const;
   return <h1 className="wordmark" aria-label="PORTFOLIO"><svg viewBox="0 0 1200 350" aria-hidden="true" focusable="false">
     {letters.map(([letter,x,y,rotate,size],i)=><text key={i} x={x} y={y} textAnchor="middle" fontSize={size} textLength={letter==="I"?75:132} lengthAdjust="spacingAndGlyphs" transform={`rotate(${rotate} ${x} ${y})`}>{letter}</text>)}
-    <text className="edition" x="1030" y="86" fontSize="120" transform="rotate(3 1030 86)">{abey.edition}</text>
   </svg></h1>;
 }
 
