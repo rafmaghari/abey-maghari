@@ -8,7 +8,7 @@ Native Apple Vision selects only the instance at the face, then a continuous bou
 
 The 864×1184 source is framed to rows 100…1099, then translated by (+68, −100) into a 1000×1300 transparent asset. This excludes the empty top margin and bottom strip containing the background sparkle; it is a bust crop, not painted mark removal. The visible stage is square so it meets the bust baseline at asset y=1000.
 
-Published Normal is **lossless WebP**. Five independent source-derived RGB digests cover face, braces, hair, gold earring and black top. The retained source RGB remains exact, including in the published lossless asset. Source-derived test values must never be updated from the output.
+Published Normal is **lossless WebP**. Five independent source-derived RGB digests cover face, braces, hair, gold earring and black top. The retained source RGB remains exact, including in the published lossless asset. A full decoded-image comparison verified all 473,987 nontransparent Normal pixels against the corresponding edited-source coordinates with maximum RGB difference 0 (including 454,613 fully opaque pixels). Source-derived test values must never be updated from the output.
 
 Reproduce the matte intermediate using the approved source and native extractor (macOS Vision; Python refinement requires Pillow and NumPy):
 
