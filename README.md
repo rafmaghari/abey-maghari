@@ -1,6 +1,6 @@
 # Abey Maghari
 
-A light personal profile with two portrait styles and an eight-item dress-up inventory. Built with Next.js App Router, TypeScript, Tailwind and Framer Motion.
+A light personal profile with approved professional experience, native expandable role details, two portrait styles and an eight-item dress-up inventory. Built with Next.js App Router, TypeScript, Tailwind and Framer Motion.
 
 ## Run
 
@@ -15,7 +15,7 @@ Open http://localhost:3098. For a production preview, run `npm run build && npm 
 
 Edit **`src/content/abey.ts`**. Every unconfirmed personal detail is explicitly marked TODO; the decorative reference edition also needs confirmation. There are no invented jobs, dates or social links. Search indexing is disabled until the placeholders are replaced.
 
-The approved visual direction and reference measurements are in `DESIGN.md`; durable product constraints are in `PRODUCT.md`.
+The approved visual direction and reference measurements are in `DESIGN.md`; durable product constraints are in `PRODUCT.md`. The career source fixture is `tests/fixtures/abey-experience.md`; preserve its wording and truncation/hidden-skill notes. The extension's design is recorded in `docs/experience-extension.md`.
 
 ## Check
 
@@ -24,7 +24,7 @@ npm run build
 npm run lint
 npx tsc --noEmit
 npm run check:assets
-npx playwright test tests/e2e/profile.spec.ts --workers=2
+npx playwright test tests/e2e/experience.spec.ts tests/e2e/profile.spec.ts --workers=2
 ```
 
 Use the available worker budget (maximum four) rather than an uncapped run. The scoped flow runs Chromium and WebKit at three viewports and keeps screenshots, video, trace and caption timestamps. Browser binaries must already be installed.

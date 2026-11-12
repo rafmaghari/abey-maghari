@@ -15,7 +15,7 @@
   text-decoration: none;
   white-space: nowrap;
 }
-.introduction #intro-title { max-width: 23ch; text-wrap: balance; }
+.introduction #intro-title { max-width: 23ch; text-wrap: balance; overflow-wrap: anywhere; }
 .career-section { margin-top: 60px; overflow-wrap: anywhere; }
 .section-title {
   color: var(--tan);

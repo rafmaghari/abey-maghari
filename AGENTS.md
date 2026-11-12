@@ -20,6 +20,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 - Validate hair-accessory anchors against the portrait alpha in source-canvas coordinates, not scaled screenshot estimates; the flow samples the bow centre to catch ornaments floating in transparent space.
 
+- Display headlines need the same long-copy wrapping guarantee as paragraphs; the existing intro overflow regression covers both. See `src/app/experience.css` and `tests/e2e/profile.spec.ts`.
 - Approved career copy and truncation limitations: `tests/fixtures/abey-experience.md`; editable data stays in `src/content/abey.ts`. `tests/e2e/experience.spec.ts` checks literal source copy, both Books To Go titles and native disclosures. Do not infer hidden skills or company logos.
 - Portrait repairs are separately pending; do not silently change the assets during career-content work. See the scope boundary in `docs/experience-extension.md`.
 
