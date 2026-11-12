@@ -1,0 +1,124 @@
+{
+  "source": "abey-edited.png",
+  "sourceSha256": "3ecbf7d056cc45348ad1481ab64118905555afc7db715c326e55b3b4ac77a56b",
+  "sourceSize": [
+    864,
+    1184
+  ],
+  "outputSize": [
+    1000,
+    1300
+  ],
+  "sourceCrop": [
+    0,
+    100,
+    864,
+    1100
+  ],
+  "translation": [
+    68,
+    -100
+  ],
+  "features": [
+    {
+      "name": "face",
+      "source": [
+        350,
+        325,
+        210,
+        290
+      ],
+      "output": [
+        418,
+        225,
+        210,
+        290
+      ],
+      "rgbSha256": "87d8c2773c1b15afe3426a3d1edffa2b9a176b3c543bcf2c50ee42ce6632940d"
+    },
+    {
+      "name": "braces",
+      "source": [
+        365,
+        570,
+        150,
+        55
+      ],
+      "output": [
+        433,
+        470,
+        150,
+        55
+      ],
+      "rgbSha256": "cb3cf3ed2f12fd3154462b8e79eb5a94794ae381ad983cc6375eb38504b5c3ea"
+    },
+    {
+      "name": "hair",
+      "source": [
+        595,
+        330,
+        85,
+        160
+      ],
+      "output": [
+        663,
+        230,
+        85,
+        160
+      ],
+      "rgbSha256": "5c57af91e10fd924e11e79710cbb8395146d9106c9bbb3d21ce69199ac980515"
+    },
+    {
+      "name": "earring",
+      "source": [
+        607,
+        641,
+        35,
+        47
+      ],
+      "output": [
+        675,
+        541,
+        35,
+        47
+      ],
+      "rgbSha256": "b8f3d19063da26f8b1ff043afac06b8a290f8b20d25ef5f9f9a02c9fd09c4b39"
+    },
+    {
+      "name": "blackTop",
+      "source": [
+        475,
+        870,
+        180,
+        130
+      ],
+      "output": [
+        543,
+        770,
+        180,
+        130
+      ],
+      "rgbSha256": "465880453f2e63d42b7de7ce306df2138bf9225124a18d7275d9b2faff45013e"
+    }
+  ],
+  "emptyRegions": [
+    {
+      "name": "unrelated lower-left limb",
+      "box": [
+        0,
+        650,
+        190,
+        350
+      ]
+    },
+    {
+      "name": "removed background sparkle",
+      "box": [
+        875,
+        1025,
+        60,
+        60
+      ]
+    }
+  ]
+}
