@@ -107,7 +107,7 @@ footer a { min-height: 32px; }
   .bag-button strong { font-size: 14px; }.bag-button small { font-size: 11px; }
   .info-grid { grid-template-columns: 2fr 1fr; gap: 48px; margin-top: 48px; }
   .notes dl { grid-template-columns: 1fr; }
-  .favourite-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 22px; }
+  .favourite-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
   .card-number { font-size: clamp(48px, 7.5vw, 110px); }
   .favourite-grid h3 { font-size: clamp(12px, 1.2vw, 17px); }
   .favourite-grid p { font-size: clamp(10px, 1vw, 14px); }

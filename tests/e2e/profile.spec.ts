@@ -145,13 +145,14 @@ test('portrait modes and every inventory item remain usable and face-safe', asyn
   await page.emulateMedia({ colorScheme: 'dark' });
   expect(await page.locator('html').evaluate(el => getComputedStyle(el).backgroundColor)).toBe('rgb(255, 252, 245)');
   await capture(page, testInfo.outputPath('dark-system.png'));
-  await step('Scroll tour: approved career headline, unfilled personal details and five TODO cards.');
+  await step('Scroll tour: approved career headline, personal details and four favourite things.');
   await page.getByRole('heading', { name: 'I help teams turn messy data into smart decisions.' }).scrollIntoViewIfNeeded();
   await expect(page.getByTestId('intro')).toHaveText('I help teams turn messy data into smart decisions.');
   await expect(page.getByTestId('personal-notes')).toContainText('TODO');
   await page.getByRole('heading', { name: 'FAVOURITE THINGS' }).scrollIntoViewIfNeeded();
-  await expect(page.getByTestId('favourite-card')).toHaveCount(5);
-  for (const card of await page.getByTestId('favourite-card').all()) await expect(card).toContainText('TODO');
+  const favourites = page.getByRole('region', { name: 'FAVOURITE THINGS' });
+  await expect(favourites.getByTestId('favourite-card').locator('h3')).toHaveText(['Guitar', 'Motorcycle', 'Travel', 'Biking']);
+  await expect(favourites).not.toContainText('TODO');
   await capture(page, testInfo.outputPath('full-page.png'));
   // Worst-case copy must wrap rather than widen the layout.
   await page.getByTestId('intro').evaluate(el => { el.textContent = 'TODO ' + 'Averylongunbrokenword'.repeat(15) + ' 你好 🌸'; });

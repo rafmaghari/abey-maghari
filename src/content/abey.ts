@@ -19,11 +19,10 @@ export const abey = {
   ],
   favouritesTitle: "FAVOURITE THINGS",
   favourites: [
-    { title: "On repeat", prompt: "TODO · My favourite music", art: "record", color: "sand" },
-    { title: "Little joys", prompt: "TODO · Things that make me happy", art: "heart", color: "beige" },
-    { title: "Between pages", prompt: "TODO · A book I love", art: "book", color: "peach" },
-    { title: "Out & about", prompt: "TODO · A place to share", art: "camera", color: "olive" },
-    { title: "Just for fun", prompt: "TODO · Something I love doing", art: "flower", color: "blue" },
+    { title: "Guitar", prompt: "A little music", art: "guitar", color: "sand" },
+    { title: "Motorcycle", prompt: "On two wheels", art: "motorcycle", color: "peach" },
+    { title: "Travel", prompt: "Out in the world", art: "travel", color: "olive" },
+    { title: "Biking", prompt: "A ride to enjoy", art: "bicycle", color: "blue" },
   ],
   footer: "A little space for Abey.",
 } as const;
