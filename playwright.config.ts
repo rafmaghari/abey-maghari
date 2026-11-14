@@ -12,7 +12,7 @@ export default defineConfig({
   retries: 0,
   timeout: 120_000,
   reporter: [['list']],
-  use: { baseURL: 'http://127.0.0.1:3098', screenshot: 'only-on-failure' },
+  use: { baseURL: process.env.PLAYWRIGHT_BASE_URL ?? 'http://127.0.0.1:3098', screenshot: 'only-on-failure' },
   projects: ['chromium', 'webkit'].flatMap(browser => viewports.map(viewport => ({
     name: `${browser}-${viewport.name}`,
     use: { browserName: browser as 'chromium' | 'webkit', viewport: { width: viewport.width, height: viewport.height } },
